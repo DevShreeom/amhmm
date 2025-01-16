@@ -87,3 +87,27 @@ papers.forEach(paper => {
   const p = new Paper();
   p.init(paper);
 });
+// Trigger autoplay music on first interaction via the hidden button
+const bgMusic = document.getElementById('bg-music');
+const playButton = document.getElementById('play-music');
+
+// Automatically click the hidden button to play music on page load
+playButton.addEventListener('click', () => {
+  bgMusic.play();
+  playButton.style.display = 'none';  // Hide the button after it starts the music
+});
+
+// Fallback to clicking or touching anywhere on the page to play the music
+document.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    playButton.click();  // Trigger the hidden button click if no other interaction
+  }
+});
+
+// Add touchstart event for mobile devices
+document.addEventListener('touchstart', () => {
+  if (bgMusic.paused) {
+    playButton.click();  // Trigger the hidden button click if no other interaction
+  }
+});
+
